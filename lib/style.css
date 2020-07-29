@@ -1,5 +1,5 @@
 .input-group .ng-valid.ng-dirty {
-    border : solid 3px blue;
+    border : solid 3px lime;
   }
 
 .input-group .ng-invalid.ng-dirty {
