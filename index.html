@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- AngularJS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+
+    <!--Bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="lib/style.css"></script>
+
+    <!-- Custom JS -->
+    <script src="lib/app.js"></script>
+    <script src="controllers/controllers.js"></script>
+    <script src="lib/directives.js"></script>
+</head>
+
+<body ng-app="todo" ng-controller="TodoCtrl">
+
+    <div class="container">
+        <todo-title></todo-title>
+        <todo-form></todo-form>
+        <br />
+        <ul class="list-unstyled">
+            <!-- 반복 출력할때 ng-repeat을 사용함  -->
+            <li ng-repeat="todo in todos | filter:status">
+                <todo-item></todo-item>
+            </li>
+        </ul>
+        <todo-filter></todo-filter>
+    </div>
+
+</body>
+
+</html>

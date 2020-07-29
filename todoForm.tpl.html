@@ -1,0 +1,19 @@
+<form name="todoForm" ng-submit="add(newTodoTitle)">
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Insert in to new to do.." ng-model="newTodoTitle"
+            minlength="3" autofocus />
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="submit">Insert</button>
+        </span>
+    </div>
+    <!-- 폼 검증 ng-show="boolean" todoForm의 유효값을 검증 -->
+    <div ng-show="todoForm.$invalid">
+        <div class="alert alert-warning">
+            Please enter at least 3 characters
+        </div>
+    </div>
+</form>
+
+<!-- form 속성
+<pre>{{todoForm | json}}</pre>
+-->
