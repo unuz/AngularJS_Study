@@ -1,6 +1,6 @@
 <div class="input-group">
 	<span class="input-group-addon">
-		<input type="checkbox" ng-model="todo.completed" ng-click="update();"/>
+		<input type="checkbox" ng-model="todo.completed" ng-change="update();" />
 	</span>
 	<input type="text" class="form-control" ng-model="todo.title" ng-blur="update();"/> <!-- ng-model 을 사용해서 출력(data binding) -->
 	<span class="input-group-btn">

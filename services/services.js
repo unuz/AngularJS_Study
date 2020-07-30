@@ -4,11 +4,11 @@ angular.module('todo').factory('todoStorage', function () {
     var storage = {
         todos: [],
         // _로 시작하는 함수는 private
-        _saveToLocalStorage : function (data) { // 데이터를 localStorage로 저장
+        _saveToLocalStorage: function (data) { // 데이터를 localStorage로 저장
             localStorage.setItem('TODO_DATA', JSON.stringify(data));
         },
 
-        _getFromLocalStorage : function() { // 데이터를 localStorage로 부터 가져옴
+        _getFromLocalStorage: function () { // 데이터를 localStorage로 부터 가져옴
             return JSON.parse(localStorage.getItem(TODO_DATA)) || [];
         },
 
@@ -19,14 +19,17 @@ angular.module('todo').factory('todoStorage', function () {
         },
 
         remove: function (todo) {
-            // find todo index in todos
-            var idx = storage.todos.findIndex(function (item) {
-                return item.$$hashKey === todo.$$hashKey;
-            });
-            // remove from todos
-            if (idx > -1) {
-                storage.todos.splice(idx, 1);
-                storage._saveToLocalStorage(storage.todos);
+            var show = confirm('Are you sure you want to delete?');
+            if (show) {
+                // find todo index in todos
+                var idx = storage.todos.findIndex(function (item) {
+                    return item === todo;
+                });
+                // remove from todos
+                if (idx > -1) {
+                    storage.todos.splice(idx, 1);
+                    storage._saveToLocalStorage(storage.todos);
+                }
             }
         },
 
@@ -46,10 +49,10 @@ angular.module('todo').factory('todoStorage', function () {
             }
         },
 
-        update : function() {
-            console.log('ddddd');
+        update: function () {
             storage._saveToLocalStorage(storage.todos);
         }
+
     }
     return storage;
 });
