@@ -1,8 +1,8 @@
 <div class="input-group">
 	<span class="input-group-addon">
-		<input type="checkbox" ng-model="todo.completed"/>
+		<input type="checkbox" ng-model="todo.completed" ng-click="update();"/>
 	</span>
-	<input type="text" class="form-control" ng-model="todo.title"/> <!-- ng-model 을 사용해서 출력(data binding) -->
+	<input type="text" class="form-control" ng-model="todo.title" ng-blur="update();"/> <!-- ng-model 을 사용해서 출력(data binding) -->
 	<span class="input-group-btn">
 		<date>{{ todo.completedAt | date:'yyyy-MM-dd  hh:mm' }}</date> <!-- 내장 디렉티브 ngFilter를 사용해서 Date 출력 -->
 		<button class="btn btn-danger" type="button" ng-click="remove(todo);">Delete</button>

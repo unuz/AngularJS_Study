@@ -1,36 +1,35 @@
 
 angular.module('todo').factory('todoStorage', function () {
+    var TODO_DATA = 'TODO_DATA';
     var storage = {
-        todos: [
-            {
-                title: 'JavaScript Study',
-                completed: true,
-                completedAt: Date.now()
-            },
-            {
-                title: 'ReactJS Study',
-                completed: false,
-                completedAt: Date.now()
-            },
-            {
-                title: 'AngularJS Study',
-                completed: false,
-                completedAt: Date.now()
-            },
-        ],
+        todos: [],
+        // _로 시작하는 함수는 private
+        _saveToLocalStorage : function (data) { // 데이터를 localStorage로 저장
+            localStorage.setItem('TODO_DATA', JSON.stringify(data));
+        },
+
+        _getFromLocalStorage : function() { // 데이터를 localStorage로 부터 가져옴
+            return JSON.parse(localStorage.getItem(TODO_DATA)) || [];
+        },
+
         get: function () {
+            //storage.todos = storage._getFromLocalStorage()
+            angular.copy(storage._getFromLocalStorage(), storage.todos);
             return storage.todos;
         },
+
         remove: function (todo) {
             // find todo index in todos
             var idx = storage.todos.findIndex(function (item) {
-                return item.id === todo.id;
+                return item.$$hashKey === todo.$$hashKey;
             });
             // remove from todos
             if (idx > -1) {
                 storage.todos.splice(idx, 1);
+                storage._saveToLocalStorage(storage.todos);
             }
         },
+
         add: function (newTodoTitle) {
             // create new todo
             var newTodo = {
@@ -43,7 +42,13 @@ angular.module('todo').factory('todoStorage', function () {
                 alert('Insert in to new to do!!');
             } else {
                 storage.todos.push(newTodo);
+                storage._saveToLocalStorage(storage.todos);
             }
+        },
+
+        update : function() {
+            console.log('ddddd');
+            storage._saveToLocalStorage(storage.todos);
         }
     }
     return storage;
